@@ -54,7 +54,6 @@ class Extractor extends Model
             $NumbersPerMonth = $ds->getDataset($soql);
 			
 		    return $NumbersPerMonth;
-
     }
 }
 
@@ -175,7 +174,6 @@ class Extractor extends Model
 	    return $yearlyNumbers;
 		
 	}
-
 
 	public static function decadeAgencyReview()
 	{

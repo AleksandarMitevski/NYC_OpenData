@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>NYC Open Data</title>
 
@@ -19,6 +20,20 @@
             .show {display:block;}
             body{
                 height: 100%;
+                background-color: #e2e8f0;
+            }
+
+            #map{
+              height: 100%;
+              overflow: hidden;
+            }
+
+            .modal {
+              transition: opacity 0.25s ease;
+            }
+            body.modal-active {
+              overflow-x: hidden;
+              overflow-y: visible !important;
             }
         </style>
 
@@ -29,11 +44,12 @@
             <div class="w-1/6 bg-cover border-r-2 border-black"  style="
          background-image:linear-gradient(to bottom, transparent 50%, black 100%),
           url(' {{ asset('images/NYCpic.jpg') }} '); height: 915px;
+          position: sticky;
            ">
                 @include('components.menu') 
              </div>
 
-            <div class="w-5/6 bg-gray-300">
+            <div class="w-5/6">
                 @yield('content')
             </div>
 
