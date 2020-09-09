@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Cache;
+
 use Illuminate\Http\Request;
 
 use App\Extractor;
@@ -36,10 +38,11 @@ class DataExtractor extends Controller
 
 	public function decadeReview()
 	{
-
 		return view('welcome',[
 			'year' => '2010-2020',
-			'data' => Extractor::decadeReview(),
+			'data' => Cache::remember('decadeReview', now()->addMinutes(240), function() {
+				return Extractor::decadeReview();
+			})
 		]);
 
 	}
@@ -49,7 +52,9 @@ class DataExtractor extends Controller
 
 		return view('CityData',[
 			'year' => '2010-2020',
-			'data' => Extractor::decadeCityReview(),
+			'data' => Cache::remember('decadeCityReview', now()->addMinutes(240), function() {
+				return Extractor::decadeCityReview();
+			})
 		]);
 
 	}
@@ -59,7 +64,9 @@ class DataExtractor extends Controller
 
 		return view('agencyDataPie',[
 			'year' => '2010-2020',
-			'data' => Extractor::decadeAgencyReview(),
+			'data' => Cache::remember('decadeAgencyReview', now()->addMinutes(240), function() {
+				return Extractor::decadeAgencyReview();
+			})
 		]);
 
 	}
