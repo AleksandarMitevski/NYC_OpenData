@@ -3,14 +3,14 @@
 
 	<div class="container mt-3 bg-white rounded">
 
-		<div class="flex items-center w-full">
+		<div class="xl:flex lg:flex md:block sm:block items-center w-full">
 
 			<div class="ml-5 text-xl flex-1 text-center text-black font-semibold">
 				Data from {{$year}}
 			</div>
 
-			<div class="flex-1">
-				<div class="flex ">
+			<div class="flex-1 xl:mt-0 lg:mt-0 md:mt-0 sm:mt-5">
+				<div class="flex">
 
 					<div class="text-m text-black font-semibold">
 					<b>311</b> is a non-emergency phone number that people can call in many cities to find information about services, make complaints, or report problems like graffiti or road damage.
@@ -22,7 +22,7 @@
 	</div>
 
 	<div class="container mt-10">
-		<div class="flex items-center">
+		<div class="flex items-center xl:flex lg:flex md:block sm:block">
 				<div class="flex-1">
 
 					@if($year=='2010-2020')
@@ -56,8 +56,8 @@
 					@endif
 				</div>
 					
-				<div class="flex-1">
-					<div class=" max-w-sm bg-white rounded-lg font-semibold text-black shadow-xl">
+				<div class="flex-1 m-auto items-center">
+					<div class="bg-white rounded-lg font-semibold text-black shadow-xl xl:mt-0 lg:mt-0 md:mt-0 sm:mt-5">
 					<div class="p-2 text-center">
 						@if($year=='2010-2020')
 						The bar chart represents the number of reports per year from the decade {{$year}}
@@ -71,7 +71,7 @@
 		</div>
 
 		<div class="container mt-20 ml-8 mx-auto">
-			<div class="flex text-center">
+			<div class="flex text-center xl:flex lg:flex md:block sm:block">
 
 				@if($year=='2010-2020')
 				<div class="flex-1">
@@ -85,10 +85,10 @@
 					</div>
 				</div>
 				@else
-				<div class="flex-1">
+				<div class="flex-1 xl:mt-0 lg:mt-0 md:mt-0 sm:mt-5">
 					<a onclick="pieCity();" class="py-2 px-4 text-gray-800 text-lg font-bold rounded m-auto cursor-pointer bg-white hover:text-black focus:outline-none focus:shadow-none">Pie chart for the amount of reports per city</a>
 				</div>
-				<div class="flex-1">
+				<div class="flex-1 xl:mt-0 lg:mt-0 md:mt-0 sm:mt-5">
 					<a onclick="pieAgency();" class="py-2 px-2 text-gray-800 text-lg font-bold rounded m-auto cursor-pointer bg-white hover:text-black focus:outline-none focus:shadow-none">Pie chart for the amount of reports per agency</a>
 				</div>
 				@endif
