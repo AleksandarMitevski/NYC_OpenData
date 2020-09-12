@@ -20,7 +20,7 @@
             .show {display:block;}
             body{
                 height: 100%;
-                background-color: #e2e8f0;
+                background-color: #edf2f7;
             }
 
             #map{
@@ -41,11 +41,7 @@
     <body>
 
         <div class="flex">
-            <div class="w-1/6 bg-cover border-r-2 border-black"  style="
-         background-image:linear-gradient(to bottom, transparent 50%, black 100%),
-          url(' {{ asset('images/NYCpic.jpg') }} '); height: 915px;
-          position: sticky;
-           ">
+            <div class="w-1/6 bg-gray-800">
                 @include('components.menu') 
              </div>
 
