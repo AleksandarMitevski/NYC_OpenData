@@ -1,4 +1,4 @@
-<div class="container mx-auto text-gray-500">
+<div class="container mx-auto text-gray-500 ">
 	<div class=" mb-5 bg-gray-900">
 		<a href="{{ Route('home') }}">
 			<img src="{{ asset('images/logo') }}">
@@ -17,7 +17,7 @@
 
 	<div class="flex">
 
-	<a class=" mt-3 py-2 block text-2xl font-bold m-auto cursor-pointer hover:text-black" href="{{ Route('SelectYear') }}"> Year Select </a>
+	<a class=" mt-3 py-2 block text-2xl font-bold m-auto cursor-pointer hover:text-black" href="{{ Route('SelectYear') }}"> Select Year </a>
 
 	</div>
 

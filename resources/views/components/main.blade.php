@@ -36,7 +36,7 @@
 				</div>
 					
 				<div class="flex-1 m-auto items-center">
-					<div class="bg-white rounded-lg font-semibold text-black shadow-xl xl:mt-0 lg:mt-0 md:mt-0 sm:mt-5">
+					<div class="bg-white rounded-lg font-semibold text-black shadow-xl xl:mt-0 lg:mt-0 md:mt-5 sm:mt-5">
 					<div class="p-2 text-center">
 						@if($year=='2010-2020')
 						The bar chart represents the number of reports per year from the decade {{$year}}
@@ -64,10 +64,10 @@
 					</div>
 				</div>
 				@else
-				<div class="flex-1 xl:mt-0 lg:mt-0 md:mt-0 sm:mt-5">
+				<div class="flex-1 xl:mt-0 lg:mt-0 md:mt-5 sm:mt-5">
 					<a onclick="pieCity();" class="py-2 px-4 text-gray-800 text-lg font-bold rounded m-auto cursor-pointer bg-white hover:text-black focus:outline-none focus:shadow-none">Pie chart for the amount of reports per city</a>
 				</div>
-				<div class="flex-1 xl:mt-0 lg:mt-0 md:mt-0 sm:mt-5">
+				<div class="flex-1 xl:mt-0 lg:mt-0 md:mt-5 sm:mt-5">
 					<a onclick="pieAgency();" class="py-2 px-2 text-gray-800 text-lg font-bold rounded m-auto cursor-pointer bg-white hover:text-black focus:outline-none focus:shadow-none">Pie chart for the amount of reports per agency</a>
 				</div>
 				@endif

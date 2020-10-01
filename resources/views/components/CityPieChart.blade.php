@@ -42,10 +42,10 @@
 					</div>
 				</div>
 				@else
-				<div class="flex-1 xl:mt-0 lg:mt-0 md:mt-0 sm:mt-10">
+				<div class="flex-1 xl:mt-0 lg:mt-0 md:mt-5 sm:mt-10">
 					<a onclick="monthBar();" class="py-2 px-4 text-gray-800 text-lg font-bold m-auto cursor-pointer bg-white hover:text-black focus:outline-none focus:shadow-none"> Bar chart for the number of reports per month</a>
 				</div>
-				<div class="flex-1 xl:mt-0 lg:mt-0 md:mt-0 sm:mt-10">
+				<div class="flex-1 xl:mt-0 lg:mt-0 md:mt-5 sm:mt-10">
 					<a onclick="pieAgency();" class="py-2 px-2 text-gray-800 text-lg font-bold m-auto cursor-pointer bg-white hover:text-black focus:outline-none focus:shadow-none">Pie chart for the amount of reports per agency</a>
 				</div>
 				@endif
