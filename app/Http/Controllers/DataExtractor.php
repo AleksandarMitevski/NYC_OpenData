@@ -22,7 +22,7 @@ class DataExtractor extends Controller
 	public function getCityData($year)
 	{
 
-		return view('CityData',[
+		return view('cityData',[
 			'year' => $year,
 			'data' => Extractor::CityData($year),
 		]);
@@ -50,7 +50,7 @@ class DataExtractor extends Controller
 	public function decadeCityReview()
 	{
 
-		return view('CityData',[
+		return view('cityData',[
 			'year' => '2010-2020',
 			'data' => Cache::remember('decadeCityReview', now()->addMinutes(240), function() {
 				return Extractor::decadeCityReview();

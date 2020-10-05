@@ -43,7 +43,7 @@
         <div class="flex">
             <div class="w-1/6 bg-gray-800">
                 @include('components.menu') 
-             </div>
+            </div>
 
             <div class="w-5/6">
                 @yield('content')

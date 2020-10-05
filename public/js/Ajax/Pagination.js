@@ -5,7 +5,7 @@ document.getElementById('NextValues').addEventListener('click', LoadData);
 function LoadData(){
 	var xhr = new XMLHttpRequest();
 	
-	xhr.open('GET','https://data.cityofnewyork.us/resource/3rfa-3xsf.json?$limit=10&$order=created_date DESC&$offset='+pagination,true);
+	xhr.open('GET','https://data.cityofnewyork.us/resource/3rfa-3xsf.json?$limit=8&$order=created_date DESC&$offset='+pagination,true);
 
 	xhr.onload = function(){
         if(this.status == 200){

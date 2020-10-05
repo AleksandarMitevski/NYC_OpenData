@@ -3,7 +3,7 @@
 @section('content')
 	@include('components.header')
     <div class="flex h-screen">
-        @include('components.CityPieChart')
+        @include('components.cityPieChart')
     </div>
 @endsection
 

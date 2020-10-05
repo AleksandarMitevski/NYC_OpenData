@@ -6,6 +6,7 @@
         <div class="flex h-screen">
 			@include('components.dataTable')
         </div>
-        @include('components.MapModal')
+        
+        @include('components.mapModal')
 
 @endsection

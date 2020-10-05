@@ -18,18 +18,18 @@ Route::get('/', function(){
 })->name('home');
 
 Route::get('/SelectYear', function () {
-	return view('SelectYear');
-} )->name('SelectYear');
+	return view('selectYear');
+} )->name('selectYear');
 
 Route::get('/RawData', function(){
-	return view('Raw-Data');
-})->name('RawData');
+	return view('rawData');
+})->name('rawData');
 
-Route::get('/AggregateData', 'DataExtractor@decadeReview')->name('AggData');
+Route::get('/AggregateData', 'DataExtractor@decadeReview')->name('aggregateData');
 
-Route::get('/AggregateCityData', 'DataExtractor@decadeCityReview')->name('AggCData');
+Route::get('/AggregateCityData', 'DataExtractor@decadeCityReview')->name('aggregateCityData');
 
-Route::get('/AggregateAgencyData', 'DataExtractor@decadeAgencyReview')->name('AggAData');
+Route::get('/AggregateAgencyData', 'DataExtractor@decadeAgencyReview')->name('aggregateAgencyData');
 
 
 Route::get('year/{year}', 'DataExtractor@getData');
