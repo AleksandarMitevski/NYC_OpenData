@@ -6,4 +6,4 @@ Installation
 
 - Composer install
 
-- Php artisan key:generate
+- PHP artisan key:generate
