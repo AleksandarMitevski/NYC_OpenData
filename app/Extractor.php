@@ -5,10 +5,8 @@ use allejo\Socrata\SodaClient;
 use allejo\Socrata\SodaDataset;
 use allejo\Socrata\SoqlQuery;
 use allejo\Socrata\SoqlOrderDirection;
-use Illuminate\Database\Eloquent\Model;
-use App\Helpers\TrojanHorse;
 
-class Extractor extends Model
+class Extractor
 { 
 	public static $years = array(
 		2004 => "sqcr-6mww",
@@ -18,180 +16,154 @@ class Extractor extends Model
 		2008 => "uzcy-9puk",
 		2009 => "3rfa-3xsf",
 	);
+
+	public $sc;
+	public $soql;
+
+    public function __construct(){
+        $this->sc = new SodaClient("data.cityofnewyork.us");
+        $this->soql = new SoqlQuery();
+    }
 	
-    public static function DataFromYear($year)
+    public function dataFromYear($year)
     {
 	    	if ($year>=2010 && $year<=2020) {
 	    	
-	    	$sc = new SodaClient("data.cityofnewyork.us");
-
-			$ds = new SodaDataset($sc, "erm2-nwe9");
-
-			$soql = new SoqlQuery();
+			$ds = new SodaDataset($this->sc, "erm2-nwe9");
 			
-            $soql->select("count(created_date)","date_extract_m(created_date)")
+            $this->soql->select("count(created_date)","date_extract_m(created_date)")
             ->where("date_extract_y(created_date)=$year")
             ->group("date_extract_m(created_date)")
             ->order("date_extract_m(created_date)", SoqlOrderDirection::ASC);
             
-            $NumbersPerMonth = $ds->getDataset($soql);
+            $NumbersPerMonth = $ds->getDataset($this->soql);
 			
 		    return $NumbersPerMonth;
 
     	}else{
 	    	
-	    	$sc = new SodaClient("data.cityofnewyork.us");
-
-			$ds = new SodaDataset($sc, self::$years[$year]);
-
-			$soql = new SoqlQuery();
+			$ds = new SodaDataset($this->sc, self::$years[$year]);
 			
-            $soql->select("count(created_date)","date_extract_m(created_date)")
+            $this->soql->select("count(created_date)","date_extract_m(created_date)")
             ->where("date_extract_y(created_date)=$year")
             ->group("date_extract_m(created_date)")
             ->order("date_extract_m(created_date)", SoqlOrderDirection::ASC);
             
-            $NumbersPerMonth = $ds->getDataset($soql);
+            $NumbersPerMonth = $ds->getDataset($this->soql);
 			
 		    return $NumbersPerMonth;
-    }
-}
-
-	public static function CityData($year)
-	{
-
-		if($year>=2010 && $year<=2020){
-
-    	$sc = new SodaClient("data.cityofnewyork.us");
-
-		$ds = new SodaDataset($sc, "erm2-nwe9");
-
-		$soql = new SoqlQuery();
-		
-        $soql->select("count(created_date)","city")
-        ->where("date_extract_y(created_date)=$year")
-        ->group("city")
-        ->order("count(created_date)", SoqlOrderDirection::DESC)
-        ->limit(10);
-        
-        $NumbersPerMonth = $ds->getDataset($soql);
-		
-	    return $NumbersPerMonth;
-
-		}else{
-
-    	$sc = new SodaClient("data.cityofnewyork.us");
-
-		$ds = new SodaDataset($sc, self::$years[$year]);
-
-		$soql = new SoqlQuery();
-		
-        $soql->select("count(created_date)","city")
-        ->where("date_extract_y(created_date)=$year")
-        ->group("city")
-        ->order("count(created_date)",SoqlOrderDirection::DESC)
-        ->limit(10);
-        
-        $NumbersPerMonth = $ds->getDataset($soql);
-		
-	    return $NumbersPerMonth;
+    	}
 	}
-}
-	public static function reportsPerAgency($year)
+
+	public function cityData($year)
 	{
 		if($year>=2010 && $year<=2020){
-	    	$sc = new SodaClient("data.cityofnewyork.us");
 
-			$ds = new SodaDataset($sc, "erm2-nwe9");
-
-			$soql = new SoqlQuery();
+			$ds = new SodaDataset($this->sc, "erm2-nwe9");
 			
-	        $soql->select("count(created_date)","agency_name")
+	        $this->soql->select("count(created_date)","city")
+	        ->where("date_extract_y(created_date)=$year")
+	        ->group("city")
+	        ->order("count(created_date)", SoqlOrderDirection::DESC)
+	        ->limit(10);
+	        
+	        $NumbersPerMonth = $ds->getDataset($this->soql);
+			
+		    return $NumbersPerMonth;
+
+		}else{
+
+			$ds = new SodaDataset($this->sc, self::$years[$year]);
+			
+	        $this->soql->select("count(created_date)","city")
+	        ->where("date_extract_y(created_date)=$year")
+	        ->group("city")
+	        ->order("count(created_date)",SoqlOrderDirection::DESC)
+	        ->limit(10);
+	        
+	        $NumbersPerMonth = $ds->getDataset($this->soql);
+			
+		    return $NumbersPerMonth;
+		}
+	}
+
+	public function reportsPerAgency($year)
+	{
+		if($year>=2010 && $year<=2020){
+
+			$ds = new SodaDataset($this->sc, "erm2-nwe9");
+			
+	        $this->soql->select("count(created_date)","agency_name")
 	        ->where("date_extract_y(created_date)=$year")
 	        ->group("agency_name")
 	        ->order("count(created_date)", SoqlOrderDirection::DESC)
 	        ->limit(10);
 	        
-	        $NumbersPerMonth = $ds->getDataset($soql);
+	        $NumbersPerMonth = $ds->getDataset($this->soql);
 			
 		    return $NumbersPerMonth;
 		}else{
-	    	$sc = new SodaClient("data.cityofnewyork.us");
 
-			$ds = new SodaDataset($sc, self::$years[$year]);
+			$ds = new SodaDataset($this->sc, self::$years[$year]);
 
-			$soql = new SoqlQuery();
+			$this->soql = new SoqlQuery();
 			
-	        $soql->select("count(created_date)","agency_name")
+	        $this->soql->select("count(created_date)","agency_name")
 	        ->where("date_extract_y(created_date)=$year")
 	        ->group("agency_name")
 	        ->order("count(created_date)", SoqlOrderDirection::DESC)
 	        ->limit(10);
 	        
-	        $NumbersPerMonth = $ds->getDataset($soql);
+	        $NumbersPerMonth = $ds->getDataset($this->soql);
 			
 		    return $NumbersPerMonth;
 		}
 	}
 
 
-	public static function decadeReview()
+	public function decadeReview()
 	{
 		
-		$sc = new SodaClient("data.cityofnewyork.us");
-
-		$ds = new SodaDataset($sc, "erm2-nwe9");
-
-		$soql = new SoqlQuery();
+		$ds = new SodaDataset($this->sc, "erm2-nwe9");
 		
-	    $soql->select("count(created_date)","date_extract_y(created_date)")
+	    $this->soql->select("count(created_date)","date_extract_y(created_date)")
 	    ->group("date_extract_y(created_date)")
 	    ->order("date_extract_y(created_date)", SoqlOrderDirection::ASC);
 	    
-	    $yearlyNumbers = $ds->getDataset($soql);
+	    $yearlyNumbers = $ds->getDataset($this->soql);
 		
 	    return $yearlyNumbers;
 		
 	}
 
 
-	public static function decadeCityReview()
+	public function decadeCityReview()
 	{
 		
-		$sc = new SodaClient("data.cityofnewyork.us");
-
-		$ds = new SodaDataset($sc, "erm2-nwe9");
-
-		$soql = new SoqlQuery();
+		$ds = new SodaDataset($this->sc, "erm2-nwe9");
 		
-	    $soql->select("count(created_date)","city")
+	    $this->soql->select("count(created_date)","city")
 	    ->group("city")
 	    ->order("count(created_date)", SoqlOrderDirection::DESC)
         ->limit(10);
 	    
-	    $yearlyNumbers = $ds->getDataset($soql);
+	    $yearlyNumbers = $ds->getDataset($this->soql);
 		
 	    return $yearlyNumbers;
 		
 	}
 
-	public static function decadeAgencyReview()
+	public function decadeAgencyReview()
 	{
 		
-		$sc = new SodaClient("data.cityofnewyork.us");
-
-		$ds = new SodaDataset($sc, "erm2-nwe9");
-
-		$soql = new SoqlQuery();
+		$ds = new SodaDataset($this->sc, "erm2-nwe9");
 		
-	    $soql->select("count(created_date)","agency_name")
+	    $this->soql->select("count(created_date)","agency_name")
 	    ->group("agency_name")
 	    ->order("count(created_date)", SoqlOrderDirection::DESC);
 	    
-	    $yearlyNumbers = $ds->getDataset($soql);
+	    $yearlyNumbers = $ds->getDataset($this->soql);
 		
 	    return $yearlyNumbers;
-		
 	}
-
 }

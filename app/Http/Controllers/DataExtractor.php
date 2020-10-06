@@ -11,11 +11,18 @@ use App\Extractor;
 class DataExtractor extends Controller
 {
 
+	public $extractorClass;
+
+	public function __construct()
+	{
+		$this->extractorClass = new Extractor();
+	}
+
 	public function getData($year)
 	{
-		return view('welcome', [
+		return view('reportsData', [
 			'year' => $year,
-			'data' => Extractor::DataFromYear($year),
+			'data' => $this->extractorClass->dataFromYear($year),
 		]);
 	}
 
@@ -24,51 +31,46 @@ class DataExtractor extends Controller
 
 		return view('cityData',[
 			'year' => $year,
-			'data' => Extractor::CityData($year),
+			'data' => $this->extractorClass->cityData($year),
 		]);
 	}
 
 	public function getAgencyData($year)
 	{
+
 		return view('agencyDataPie',[
 			'year' => $year,
-			'data' => Extractor::reportsPerAgency($year),
+			'data' => $this->extractorClass->reportsPerAgency($year),
 		]);
 	}
 
 	public function decadeReview()
 	{
-		return view('welcome',[
+		return view('reportsData',[
 			'year' => '2010-2020',
 			'data' => Cache::remember('decadeReview', now()->addMinutes(240), function() {
-				return Extractor::decadeReview();
+				return $this->extractorClass->decadeReview();
 			})
 		]);
-
 	}
 
 	public function decadeCityReview()
 	{
-
 		return view('cityData',[
 			'year' => '2010-2020',
 			'data' => Cache::remember('decadeCityReview', now()->addMinutes(240), function() {
-				return Extractor::decadeCityReview();
+				return $this->extractorClass->decadeCityReview();
 			})
 		]);
-
 	}
 
 	public function decadeAgencyReview()
 	{
-
 		return view('agencyDataPie',[
 			'year' => '2010-2020',
 			'data' => Cache::remember('decadeAgencyReview', now()->addMinutes(240), function() {
-				return Extractor::decadeAgencyReview();
+				return $this->extractorClass->decadeAgencyReview();
 			})
 		]);
-
 	}
-
 }

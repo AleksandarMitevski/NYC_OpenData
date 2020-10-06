@@ -5,7 +5,7 @@
 	@include('components.header')
 	
 	<div class="flex h-screen">
-	    @include('components.main')
+	    @include('components.reportsBar')
 	</div>
 @endsection
 
