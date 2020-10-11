@@ -28,7 +28,6 @@ class DataExtractor extends Controller
 
 	public function getCityData($year)
 	{
-
 		return view('cityData',[
 			'year' => $year,
 			'data' => $this->extractorClass->cityData($year),
@@ -37,7 +36,6 @@ class DataExtractor extends Controller
 
 	public function getAgencyData($year)
 	{
-
 		return view('agencyDataPie',[
 			'year' => $year,
 			'data' => $this->extractorClass->reportsPerAgency($year),
